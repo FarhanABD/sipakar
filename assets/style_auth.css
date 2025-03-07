@@ -1,0 +1,21 @@
+.menu{
+	background: #444;
+    padding: 20px;
+	min-height: 100px;
+}
+
+.logo {
+	font-size: 35px;
+	font-weight:bold;
+	
+}
+
+.menu a {
+	text-decoration: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.menu a:hover {
+	color: #fff;
+}
