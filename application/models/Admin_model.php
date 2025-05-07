@@ -94,7 +94,6 @@ class Admin_model extends CI_Model
     $this->db->delete('gejala');
   }
 
-  // penyakit
   public function tambahPenyakit()
   {
     $Kode = $this->cekKodePenyakit();
@@ -121,6 +120,19 @@ class Admin_model extends CI_Model
     ];
     $this->db->where('id_penyakit', $this->input->post('id'));
     $this->db->update('penyakit', $data);
+  }
+
+  public function tambahSaran()
+  {
+      $data = [
+          'pengobatan' => $this->input->post('pengobatan'),
+          'gejala'     => $this->input->post('gejala'),
+          'diagnosis'  => $this->input->post('diagnosis'),
+      ];
+  
+      $this->db->where('id_user', $this->input->post('id'));
+      // $this->db->where('id', $this->input->post('id'));
+      $this->db->update('riwayat_gejala', $data);
   }
 
   public function hapusPenyakit($id)

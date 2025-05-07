@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property form_validation $form_validation
  * @property input $input
  * @property upload $upload
- * @property user $user
+ * @property Usrr_model $user
  */
 
 class User extends CI_Controller
@@ -128,6 +128,19 @@ class User extends CI_Controller
     $this->load->view('templates/sidebar', $data);
     $this->load->view('templates/topbar', $data);
     $this->load->view('user/daftar-konsultasi', $data);
+    $this->load->view('templates/footer');
+  }
+
+  public function riwayatku(){
+    $data['judul'] = 'Sistem Pakar Metode Naive Bayes';
+    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['subMenu'] = $this->db->get_where('sub_menu_user', ['id' => 12])->row_array();
+    $data['riwayat_gejala'] = $this->user->getRiwayat();
+    $data['daftar'] = $this->db->get('riwayat_gejala')->result_array();
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('user/riwayat-gejala', $data);
     $this->load->view('templates/footer');
   }
 

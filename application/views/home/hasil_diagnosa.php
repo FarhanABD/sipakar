@@ -34,9 +34,13 @@
     <div class="container mt-5 text-center">
         <h1 class="mb-4" style="font-weight: bold;">Hasil Diagnosis Penyakit</h1>
         <div class="alert alert-info fs-4" role="alert">
+            <?php if (!empty($hasilMax)) : ?>
             <?php foreach ($hasilMax as $h) : ?>
             <strong><?= $h['nama_penyakit']; ?></strong>
             <?php endforeach; ?>
+            <?php else : ?>
+            <strong>Gangguan Gizi Buruk Kronis</strong>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -48,6 +52,8 @@
                     <p><?= $h['informasi']; ?></p>
                     <h5><b>Saran</b></h5>
                     <p><?= $h['saran']; ?></p>
+                    <h5><b>Hubungi Nomor Puskesmas</b></h5>
+                    <p>0822-2886-3177</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -64,10 +70,16 @@
                                 <?= floor($h['hasil_probabilitas'] * 100); ?>%
                             </div>
                         </div>
+                        <?php if ($h['nama_penyakit'] == 'Gangguan Gizi Buruk Kronis' && $h['hasil_probabilitas'] >= 0.5) : ?>
+                        <div class="alert alert-warning mt-2">
+                            <strong>Anda mungkin terkena komplikasi Gangguan Gizi Buruk Kronis.</strong>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <?php endforeach; ?>
                 </div>
             </div>
+
         </div>
     </div>
 

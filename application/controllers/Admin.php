@@ -100,7 +100,6 @@ class Admin extends CI_Controller
     $this->load->view('admin/modals/modal_edit_penyakit', $data);
   }
 
-
   public function rule()
   {
     $data['judul'] = 'Sistem Pakar Metode Naive Bayes';
@@ -129,13 +128,18 @@ class Admin extends CI_Controller
     $data['judul'] = 'Sistem Pakar Metode Naive Bayes';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
     $data['subMenu'] = $this->db->get_where('sub_menu_user', ['id' => 7])->row_array();
-    $data['dftr_konsul'] = $this->db->get('daftar_konsultasi')->result_array();
+    $this->db->select('riwayat_gejala.*, user.name as nama_user');
+    $this->db->from('riwayat_gejala');
+    $this->db->join('user', 'riwayat_gejala.id_user = user.id');
+    // $this->db->join('user', 'riwayat_gejala.id = user.id');
+    $data['dftr_konsul'] = $this->db->get()->result_array();
+
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
     $this->load->view('templates/topbar', $data);
     $this->load->view('admin/daftar_konsultasi', $data);
+    $this->load->view('admin/modals/modal_tambah_pengobatan');
     $this->load->view('templates/footer');
   }
-
   
 }

@@ -118,8 +118,6 @@ class Rule extends CI_Controller
     redirect('admin/rule');
   }
 
-
-
   public function editRule()
   {
     $this->admin->editRule();

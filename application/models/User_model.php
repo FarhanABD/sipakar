@@ -36,6 +36,19 @@ class User_model extends CI_Model
     $query = "SELECT `daftar_konsultasi`.* FROM `daftar_konsultasi` JOIN `user` ON `daftar_konsultasi`.`id_user` = `user`.`id` WHERE `daftar_konsultasi`.`id_user` = $idUser ORDER BY `daftar_konsultasi`.`id`";
     return $this->db->query($query)->result_array();
   }
+
+  public function getRiwayat()
+  {
+    $this->db->select('*');
+    $this->db->from('user');
+    $this->db->where('email', $this->session->userdata('email'));
+    $data = $this->db->get()->result();
+    foreach ($data as $row) {
+      $idUser = $row->id;
+    }
+    $query = "SELECT `riwayat_gejala`.* FROM `riwayat_gejala` JOIN `user` ON `riwayat_gejala`.`id_user` = `user`.`id` WHERE `riwayat_gejala`.`id_user` = $idUser ORDER BY `riwayat_gejala`.`id`";
+    return $this->db->query($query)->result_array();
+  }
   public function hapusKonsultasi($id)
   {
     $this->db->where('id', $id);

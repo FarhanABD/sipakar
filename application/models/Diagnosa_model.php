@@ -13,119 +13,139 @@ class Diagnosa_model extends CI_Model
   }
   
 
-  public function getProbKwarshiorkor()
-  {
-    $this->db->select('*');
-    $this->db->from('temporary_final');
-    $this->db->where('id_penyakit', 1);
-    $data = $this->db->get()->result();
-    //inisialisasi untuk total probabilitas
-    $jumlah = 1;
-    foreach ($data as $row) {
-      //perkalian antar setiap id_gejala x probabilitasnya
-      $jumlah = $jumlah * $row->probabilitas;
-    }
-    $this->db->select('*');
-    $this->db->from('penyakit');
-    $this->db->where('id_penyakit', 1);
-    $data = $this->db->get()->result();
-    foreach ($data as $rowku) {
-      //P(H1|F)
-      $hasil = $jumlah * $rowku->probabilitas;
-    }
-    return $hasil;
-  }
+  // public function getProbKwarshiorkor()
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('temporary_final');
+  //   $this->db->where('id_penyakit', 1);
+  //   $data = $this->db->get()->result();
+  //   //inisialisasi untuk total probabilitas
+  //   $jumlah = 1;
+  //   foreach ($data as $row) {
+  //     //perkalian antar setiap id_gejala x probabilitasnya
+  //     $jumlah = $jumlah * $row->probabilitas;
+  //   }
+  //   $this->db->select('*');
+  //   $this->db->from('penyakit');
+  //   $this->db->where('id_penyakit', 1);
+  //   $data = $this->db->get()->result();
+  //   foreach ($data as $rowku) {
+  //     //P(H1|F)
+  //     $hasil = $jumlah * $rowku->probabilitas;
+  //   }
+  //   return $hasil;
+  // }
 
   
 
-  public function getProbMarasmus()
-  {
-    $this->db->select('*');
-    $this->db->from('temporary_final');
-    $this->db->where('id_penyakit', 3);
-    $data = $this->db->get()->result();
-    //inisialisasi untuk total probabilitas
-    $jumlah = 1;
-    foreach ($data as $row) {
-      //perkalian antar setiap id_gejala x probabilitasnya
-      $jumlah = $jumlah * $row->probabilitas;
-    }
-    $this->db->select('*');
-    $this->db->from('penyakit');
-    $this->db->where('id_penyakit', 3);
-    $data = $this->db->get()->result();
-    foreach ($data as $rowku) {
-      //P(H2|F)
-      $hasil = $jumlah * $rowku->probabilitas;
-    }
-    return $hasil;
-  }
+  // public function getProbMarasmus()
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('temporary_final');
+  //   $this->db->where('id_penyakit', 3);
+  //   $data = $this->db->get()->result();
+  //   //inisialisasi untuk total probabilitas
+  //   $jumlah = 1;
+  //   foreach ($data as $row) {
+  //     //perkalian antar setiap id_gejala x probabilitasnya
+  //     $jumlah = $jumlah * $row->probabilitas;
+  //   }
+  //   $this->db->select('*');
+  //   $this->db->from('penyakit');
+  //   $this->db->where('id_penyakit', 3);
+  //   $data = $this->db->get()->result();
+  //   foreach ($data as $rowku) {
+  //     //P(H2|F)
+  //     $hasil = $jumlah * $rowku->probabilitas;
+  //   }
+  //   return $hasil;
+  // }
  
 
-  public function getProbMarasmusKwarshiorkor()
-  {
-    $this->db->select('*');
-    $this->db->from('temporary_final');
-    $this->db->where('id_penyakit', 4);
-    $data = $this->db->get()->result();
-    //inisialisasi untuk total probabilitas
-    $jumlah = 1;
-    foreach ($data as $row) {
-      $jumlah = $jumlah * $row->probabilitas;
-    }
-    $this->db->select('*');
-    $this->db->from('penyakit');
-    $this->db->where('id_penyakit', 4);
-    $data = $this->db->get()->result();
-    foreach ($data as $rowku) {
-      //P(H3|F)
-      $hasil = $jumlah * $rowku->probabilitas;
-    }
-    return $hasil;
-  }
+  // public function getProbMarasmusKwarshiorkor()
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('temporary_final');
+  //   $this->db->where('id_penyakit', 4);
+  //   $data = $this->db->get()->result();
+  //   //inisialisasi untuk total probabilitas
+  //   $jumlah = 1;
+  //   foreach ($data as $row) {
+  //     $jumlah = $jumlah * $row->probabilitas;
+  //   }
+  //   $this->db->select('*');
+  //   $this->db->from('penyakit');
+  //   $this->db->where('id_penyakit', 4);
+  //   $data = $this->db->get()->result();
+  //   foreach ($data as $rowku) {
+  //     //P(H3|F)
+  //     $hasil = $jumlah * $rowku->probabilitas;
+  //   }
+  //   return $hasil;
+  // }
 
-  public function getProbBeriBeri()
-  {
-    $this->db->select('*');
-    $this->db->from('temporary_final');
-    $this->db->where('id_penyakit', 5);
+  // public function getProbBeriBeri()
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('temporary_final');
+  //   $this->db->where('id_penyakit', 5);
+  //   $data = $this->db->get()->result();
+  //   //inisialisasi untuk total probabilitas
+  //   $jumlah = 1;
+  //   foreach ($data as $row) {
+  //     $jumlah = $jumlah * $row->probabilitas;
+  //   }
+  //   $this->db->select('*');
+  //   $this->db->from('penyakit');
+  //   $this->db->where('id_penyakit', 5);
+  //   $data = $this->db->get()->result();
+  //   foreach ($data as $rowku) {
+  //     //P(H4|F)
+  //     $hasil = $jumlah * $rowku->probabilitas;
+  //   }
+  //   return $hasil;
+  // }
+  // public function getProbSkorbut()
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('temporary_final');
+  //   $this->db->where('id_penyakit', 6);
+  //   $data = $this->db->get()->result();
+  //   //inisialisasi untuk total probabilitas
+  //   $jumlah = 1;
+  //   foreach ($data as $row) {
+  //     $jumlah = $jumlah * $row->probabilitas;
+  //   }
+  //   $this->db->select('*');
+  //   $this->db->from('penyakit');
+  //   $this->db->where('id_penyakit', 6);
+  //   $data = $this->db->get()->result();
+  //   foreach ($data as $rowku) {
+  //     ////P(H5F)
+  //     $hasil = $jumlah * $rowku->probabilitas;
+  //   }
+  //   return $hasil;
+  // }
+
+  public function getProbPenyakit($id_penyakit) {
+    $this->db->select('*')->from('temporary_final')->where('id_penyakit', $id_penyakit);
     $data = $this->db->get()->result();
-    //inisialisasi untuk total probabilitas
+  
     $jumlah = 1;
     foreach ($data as $row) {
-      $jumlah = $jumlah * $row->probabilitas;
+      $jumlah *= $row->probabilitas;
     }
-    $this->db->select('*');
-    $this->db->from('penyakit');
-    $this->db->where('id_penyakit', 5);
-    $data = $this->db->get()->result();
-    foreach ($data as $rowku) {
-      //P(H4|F)
+  
+    $this->db->select('*')->from('penyakit')->where('id_penyakit', $id_penyakit);
+    $data_penyakit = $this->db->get()->result();
+  
+    foreach ($data_penyakit as $rowku) {
       $hasil = $jumlah * $rowku->probabilitas;
     }
+  
     return $hasil;
   }
-  public function getProbSkorbut()
-  {
-    $this->db->select('*');
-    $this->db->from('temporary_final');
-    $this->db->where('id_penyakit', 6);
-    $data = $this->db->get()->result();
-    //inisialisasi untuk total probabilitas
-    $jumlah = 1;
-    foreach ($data as $row) {
-      $jumlah = $jumlah * $row->probabilitas;
-    }
-    $this->db->select('*');
-    $this->db->from('penyakit');
-    $this->db->where('id_penyakit', 6);
-    $data = $this->db->get()->result();
-    foreach ($data as $rowku) {
-      ////P(H5F)
-      $hasil = $jumlah * $rowku->probabilitas;
-    }
-    return $hasil;
-  }
+  
   public function insertTempFinal()
   {
     $query = "SELECT `rule`.`id_penyakit`,`rule`.`id_gejala`, `rule`.`probabilitas` from `rule` JOIN `temporary` ON `rule`.`id_gejala` = `temporary`.`id_gejala` ORDER BY `rule`.`id_penyakit` ASC";
@@ -211,4 +231,51 @@ class Diagnosa_model extends CI_Model
     ];
     return $this->db->insert('daftar_konsultasi', $data);
   }
+
+  public function insertRiwayatKonsult($gejala)
+{
+    // Ambil data user berdasarkan session email
+    $this->db->select('*');
+    $this->db->from('user');
+    $this->db->where('email', $this->session->userdata('email'));
+    $user = $this->db->get()->row();
+
+    if (!$user) {
+        return false; // Jika user tidak ditemukan, hentikan proses
+    }
+
+    // Ambil hasil diagnosis tertinggi
+    $penyakit = $this->diagnosisMax();
+    $diagnosis = (!empty($penyakit)) ? $penyakit[0]['nama_penyakit'] : 'Tidak Diketahui';
+
+    // Ambil nama gejala berdasarkan ID yang dipilih
+    $this->db->select('gejala');
+    $this->db->from('gejala');
+    $this->db->where_in('id_gejala', $gejala); // Ambil semua gejala berdasarkan ID
+    $result = $this->db->get()->result_array();
+
+    // Ubah array hasil query menjadi daftar gejala (nama)
+    $nama_gejala = array_column($result, 'gejala');
+
+    // Simpan data konsultasi ke tabel riwayat_gejala
+    $data = [
+        'tanggal' => date('Y-m-d'),
+        'id_user' => $user->id,
+        'diagnosis' => $diagnosis,
+        'gejala' => implode(', ', $nama_gejala) // Simpan sebagai teks
+    ];
+    
+    return $this->db->insert('riwayat_gejala', $data);
+}
+
+
+  public function getAllKonsultasi()
+{
+    return $this->db->get('daftar_konsultasi')->result_array();
+}
+
+  public function getAllRiwayat(){
+    return $this->db->get('riwayat_gejala')->result_arraY();
+}
+
 }

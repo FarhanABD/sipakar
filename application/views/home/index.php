@@ -25,10 +25,8 @@
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
-
 </head>
 
 <body class="index-page">
@@ -39,13 +37,11 @@
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">Si Gizi</h1>
             </a>
-
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">Tentang</a></li>
                     <li><a href="#services">Informasi</a></li>
-
                     <!-- Conditional Button -->
                     <?php if ($this->session->userdata('email')): ?>
                     <li><a href="<?= base_url('user'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
@@ -61,16 +57,16 @@
 
 
     <main class="main">
-
         <!-- Hero Section -->
         <section id="hero" class="hero section">
-
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
                         data-aos="fade-up">
-                        <h1>Sistem Pakar Diagnosa Penyakit Gizi Buruk Pada Balita</h1>
-                        <p>Deteksi dini gangguan gizi buruk anak anda</p>
+                        <h1>Sistem Pakar Diagnosa Gangguan Gizi Buruk Pada Balita</h1>
+                        <!-- <h1>Tugas promosi kesehatan</h1> -->
+                        <p>Deteksi dini gangguan gizi buruk pada balita</p>
+                        <!-- <p>Data Stunting kecamatan Arjasa</p> -->
                         <div class="d-flex">
                             <a href="<?= base_url('home/diagnosa'); ?>" class="btn-get-started">Mulai Diagnosa</a>
                             <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
@@ -256,16 +252,27 @@
             </div>
         </section>
 
-        <!-- Services Section (Replaced with Bar Chart) -->
+        <!-- Services Section (Replaced with Bar Chart and Pie Chart) -->
         <section id="services" class="services section light-background">
             <div class="container section-title" data-aos="fade-up">
                 <span>Statistik</span>
                 <h2>Kasus Stunting di Jember</h2>
-                <p style="font-size: 24px;">Jumlah kasus stunting di setiap kecamatan di Jember berdasarkan data
+                <p style="font-size: 18px;">Jumlah kasus stunting di setiap kecamatan di Jember berdasarkan data
                     terbaru.</p>
             </div>
-            <div class="container">
-                <canvas id="stuntingChart"></canvas>
+
+            <div class="container"
+                style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <!-- Grafik Batang -->
+                <div style="max-width: 50%; flex: 1;">
+                    <canvas id="stuntingChart"></canvas>
+                </div>
+
+                <!-- Pie Chart + Legend -->
+                <div style="max-width: 40%; flex: 1; display: flex; flex-direction: column; align-items: center;">
+                    <canvas id="stuntingPieChart"></canvas>
+                    <div id="legendContainer" style="margin-top: 10px; text-align: left;"></div>
+                </div>
             </div>
         </section>
 
@@ -273,7 +280,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var ctx = document.getElementById("stuntingChart").getContext("2d");
+            var ctxBar = document.getElementById("stuntingChart").getContext("2d");
+            var ctxPie = document.getElementById("stuntingPieChart").getContext("2d");
 
             var labels = [];
             var data = [];
@@ -283,7 +291,8 @@
             data.push(<?= $row['jumlah']; ?>);
             <?php endforeach; ?>
 
-            var stuntingChart = new Chart(ctx, {
+            // Bar Chart
+            var stuntingChart = new Chart(ctxBar, {
                 type: "bar",
                 data: {
                     labels: labels,
@@ -304,8 +313,99 @@
                     }
                 }
             });
+
+            // Pie Chart
+            var stuntingPieChart = new Chart(ctxPie, {
+                type: "pie",
+                data: {
+                    // labels: labels,
+                    labels: ["Desa Kamal",
+                        "Desa Biting",
+                        "Desa Candijati",
+                        "Desa Kemuning",
+                        "Desa Darsono"
+                    ],
+                    datasets: [{
+                        label: "Persentase Kasus Stunting",
+                        // data: data,
+                        data: ["21", "3", "15", "19", "22"],
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.6)",
+                            "rgba(54, 162, 235, 0.6)",
+                            "rgba(255, 206, 86, 0.6)",
+                            "rgba(75, 192, 192, 0.6)",
+                            "rgba(153, 102, 255, 0.6)",
+                            "rgba(255, 159, 64, 0.6)"
+                        ],
+                        borderColor: [
+                            "rgb(255, 99, 132)",
+                            "rgb(54, 162, 235)",
+                            "rgb(255, 206, 86)",
+                            "rgb(75, 192, 192)",
+                            "rgb(153, 102, 255)",
+                            "rgb(255, 159, 64)"
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
         });
         </script>
+
+
+        <section id="testimonials" class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-4">Pencegahan Gizi Buruk</h2>
+                <p class="mb-5">Beberapa dokumentasi upaya pencegahan untuk menekan angka gizi buruk.</p>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
+                    data-bs-interval="3000" data-bs-wrap="true">
+                    <!-- Indicators -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></button>
+                    </div>
+
+                    <!-- Slides -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="assets/img/gambar-1 fix.jpeg" class="d-block w-100" alt="Testimoni 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/gambar-2 fix.jpg" class="d-block w-100" alt="Testimoni 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/gambar-3 fix.jpg" class="d-block w-100" alt="Testimoni 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="assets/img/gambar-4fix.jpg" class="d-block w-100" alt="Testimoni 4">
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Bootstrap JS (jika belum dimasukkan) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- End Carousel Section -->
+
 
         <!-- Load Bootstrap and Chart.js -->
 
@@ -374,13 +474,13 @@
             </div>
         </div>
 
-        <div class="container copyright text-center mt-4">
+        <!-- <div class="container copyright text-center mt-4">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">eNno</strong> <span>All Rights Reserved</span></p>
             <div class="credits">
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
                     href=“https://themewagon.com>ThemeWagon
             </div>
-        </div>
+        </div> -->
     </footer>
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i

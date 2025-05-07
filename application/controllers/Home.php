@@ -15,14 +15,11 @@ class Home extends CI_Controller
     $data['grafik'] = $this->db->get('grafik')->result_array();
     $this->load->view('home/index', $data);
 }
-
- 
   
   public function hasil_diagnosa()
   {
     $this->load->view('home/hasil_diagnosa');
   }
-
   
 
   public function diagnosa()

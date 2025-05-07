@@ -41,4 +41,6 @@ class Gejala extends CI_Controller
     $this->session->set_flashdata('flash', 'Dihapus');
     redirect('admin/gejala');
   }
+
+  
 }
